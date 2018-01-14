@@ -19,11 +19,14 @@ export const noteInitialize = () => dispatch => {
 }
 
 export const noteCreate = payload => dispatch=>{
+    // console.log('in post:::::', payload)
     superagent
     .post(API)
-    .set({"Content-Type":"application/json"})
-    .send({"antibiotic":payload.content, "_id":payload._id})
-    .then(res => dispatch(createAction(payload)))
+    .send({"antibiotic":payload.content})
+    .then(res => {
+        console.log('after post:::::', res.body)
+        dispatch(createAction({content:res.body.antibiotic}))
+    } )
     .catch(err => console.log(err))
 }
 
@@ -39,7 +42,6 @@ export const noteDelete = payload => dispatch => {
 
 export const noteUpdate = payload => dispatch => {
     let editAPI = `${API}?id=${payload._id}`
-    console.log('in edit note:::::::', payload);
     superagent
         .put(editAPI)
         .then(()=>{

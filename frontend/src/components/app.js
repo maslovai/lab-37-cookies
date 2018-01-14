@@ -7,6 +7,7 @@ import Footer from './footer';
 import Navbar from './navbar';
 import Home from './home';
 import Notes from './notes/notes-container';
+import Signin from './signin';
 
 class App extends React.Component {
 
@@ -21,8 +22,8 @@ class App extends React.Component {
                 <Navbar />
                 <main>
                     <Route exact path='/' component={Home} />
-                    <Route exact path='/notes' component={ () => <Notes /> } />
-                    {/* <Route path='/' component={} /> */}
+                    <Route exact path='/notes' component={() => <Notes /> } />
+                    <Route exact path='/signin' component={() => <Signin/>} />
                 </main>
 
                 <Footer>

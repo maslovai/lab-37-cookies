@@ -17,10 +17,11 @@ export default (state=initialState, action) => {
         return state.map(note => note._id === payload._id ? payload : note);
 
     case 'DELETE':
-        console.log('Reducer before delete. State, payload._id:::', state, payload._id);
-        let a = state.filter(note => note._id !== payload._id);
-        console.log('After delete::::::', a);
-        return a;
+        return state.filter(note =>{
+            console.log('type', typeof note._id)
+            console.log('in reducer delete:::', note, payload)
+            return note._id !== payload._id
+        }) 
 
     case 'RESET':
         return initialState;

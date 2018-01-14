@@ -17,7 +17,7 @@ class Notes extends React.Component {
     }
 
     render() {
-
+// console.log('render', this.props)
         return (
             <React.Fragment>
                 <NoteForm handler={this.props.noteCreate} />
