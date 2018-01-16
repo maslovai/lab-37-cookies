@@ -1,37 +1,34 @@
 import uuid from 'uuid/v1'
 import superagent from 'superagent';
 
-let API = `${__API_URL__}/records`;
+let API = `${__API_URL__}/notes`;
 
 export const noteInitialize = () => dispatch => {
-    console.log('in init::::::', API);
+    console.log(`in init:::::: API:    ${API}/get`);
     superagent
-        .get(API)
+        .get(`${API}/get`)
         .then(res => {
             let arr = res.body;
-            for (let i=0; i<arr.length; i++){
-                arr[i].content=arr[i].antibiotic
-                arr[i].id = arr[i]._id
-            }
             dispatch(initAction(arr))
         })
         .catch(console.error);
 }
 
 export const noteCreate = payload => dispatch=>{
-    // console.log('in post:::::', payload)
+    // console.log('in post:::::', payload.content)
     superagent
-    .post(API)
-    .send({"antibiotic":payload.content})
+    .post(`${API}/post`)
+    .set({"Content-Type":"application/json"})
+    .send({"content":payload.content})
     .then(res => {
         console.log('after post:::::', res.body)
-        dispatch(createAction({content:res.body.antibiotic}))
+        dispatch(createAction({content:res.body.content}))
     } )
     .catch(err => console.log(err))
 }
 
 export const noteDelete = payload => dispatch => {
-    let deleteAPI = `${API}?id=${payload._id}`
+    let deleteAPI = `${API}/delete/:${payload._id}`
     superagent
         .delete(deleteAPI)
         .then(() => {
@@ -41,9 +38,10 @@ export const noteDelete = payload => dispatch => {
 }
 
 export const noteUpdate = payload => dispatch => {
-    let editAPI = `${API}?id=${payload._id}`
+    let editAPI = `${API}/edit`
     superagent
         .put(editAPI)
+        .send(payload._id)
         .then(()=>{
             dispatch(updateAction(payload))
         })
