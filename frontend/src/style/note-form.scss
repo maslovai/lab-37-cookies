@@ -19,3 +19,23 @@
         margin-top:1em;
     }
 }
+.noteItems{
+    display:flex;
+    flex-direction: row;
+    align-items: center; 
+    padding: 0.5em; 
+    
+    
+    a{
+        margin: 0.5em;
+        // padding:0.5em;
+    }  
+}
+.notelistItems{
+    input{
+        background: lighten($myColor, 25%);
+        border:none;
+    }
+   
+    // border: none;
+}

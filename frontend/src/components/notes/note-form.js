@@ -5,11 +5,8 @@ class NoteForm extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {
-            // id: uuid(),
-            editing:false,
-            content:''
-        }
+        this.state = this.props.note || {content:''};
+        console.log(this.props.handler);
         this.handleChange = this.handleChange.bind(this);
         this.handleNewNote = this.handleNewNote.bind(this)
     }
@@ -20,15 +17,20 @@ class NoteForm extends React.Component {
     
     handleNewNote(e) {
         e.preventDefault();
-        console.log('CURRENT note:::::::', this.state)
-        this.props.handler(this.state);
+        this.props.handler(this.state)
     }
 
     render() {
+        // console.log(this.state);
         return (
-            <form className = 'noteForm' onSubmit={this.handleNewNote}>
-                <input placeholder="Type Note" type="textarea" name="content" onChange={this.handleChange} />
-                <button type="submit">Add Note</button>
+            <form className={this.props.edit ? "notelistForm" : "noteForm"}  onSubmit={this.handleNewNote}>
+                <input 
+                    placeholder="Type Note" 
+                    type="textarea" 
+                    name="content" 
+                    value={this.state.content}
+                    onChange={this.handleChange} />
+                <button type="submit">{this.props.button}</button>
             </form>
         )
     }

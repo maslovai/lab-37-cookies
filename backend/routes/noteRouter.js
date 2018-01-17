@@ -1,12 +1,13 @@
 'use strict';
 const Note = require('../model/note')
+const bodyParser = require('body-parser').json();
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const noteRouter = module.exports = require('express').Router();
 
-noteRouter.post('/api/notes/post',(req, res, next) => {
+noteRouter.post('/api/notes/post', bodyParser,(req, res, next) => {
     console.log("backend post::::", req.body);
-    let note = new Note({"content":req.body});
+    let note = new Note({"content":req.body.content});
     note.save()
      .then(note => res.send(note))
      .catch(next)
@@ -14,13 +15,15 @@ noteRouter.post('/api/notes/post',(req, res, next) => {
 
 
 noteRouter.get('/api/notes/get', (req, res, next) => {
-    Note.findOne()
-    .then(noteArray=>res.send(noteArray))
+    Note.find()
+    .then(noteArray=>{
+        res.send(noteArray)
+    })
     .catch(err => res.send(err))    
 })
 
-noteRouter.put('/api/notes/put',   (req, res, next)=>{
-    console.log('in edit user');
+noteRouter.put('/api/notes/edit', bodyParser, (req, res, next)=>{
+    // console.log('in edit user');
         Note.findOne({_id:req.body._id})
         .then(note=>{
             if (!req.body.content&!req.body._id) return next({statusCode:400, message: 'no body'});
@@ -33,11 +36,12 @@ noteRouter.put('/api/notes/put',   (req, res, next)=>{
         .catch(next)
 })
 
-noteRouter.delete('/api/notes/delete/:id', (req, res, next)=>{
-    Note.findOne({_id:req.params.id})
+noteRouter.delete(`/api/notes/delete`, bodyParser,(req, res, next)=>{
+    console.log('in note router delete:::::', req.body);
+    Note.findOne({_id:req.body._id})
     .then( note => {
         if (note){
-            Note.remove({_id:req.params.id})
+            Note.remove({_id:req.body._id})
             .then(res.send("success!"))
             .catch(err => res.send(err))
         }
