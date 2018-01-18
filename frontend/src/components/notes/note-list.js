@@ -11,7 +11,7 @@ class NoteList extends React.Component{
 
 render() {
     return (
-        <div className="notesList">{
+        <div>{
           renderIf(
             this.props.noteArray.length, 
                 <ul>
@@ -23,7 +23,7 @@ render() {
                                 this.props.deleteHandler(note);
                                 }
                             } href="#">X</a>
-                            <NoteForm edit ="true" handler={this.props.handler} button = "save edit" note={note}/>    
+                            <NoteForm edit ={true} handler={this.props.handler} button = "save edit" note={note}/>    
                         </span>    
                         </li>
                     )

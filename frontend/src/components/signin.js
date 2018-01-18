@@ -29,7 +29,7 @@ class Signin extends React.Component{
                             placeholder="type your password">
                         </input>
                     </label>
-                    <button>Sign up</button>
+                    <button>Sign in</button>
                 </form>
                
                 <form className = "signin">

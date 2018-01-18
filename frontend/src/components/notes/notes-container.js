@@ -20,7 +20,7 @@ class Notes extends React.Component {
 // console.log('render', this.props)
         return (
             <React.Fragment>
-                <NoteForm handler={this.props.noteCreate} edit="false" button="add note" />
+                <NoteForm handler={this.props.noteCreate} edit ={false} button="add note" />
                 <NoteList noteArray={this.props.noteArray} handler={this.props.noteUpdate} deleteHandler={this.props.noteDelete} />
             </React.Fragment>
         )
