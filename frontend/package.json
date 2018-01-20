@@ -1,5 +1,5 @@
 {
-  "name": "lab-37-authorization",
+  "name": "lab-38-file-reader",
   "version": "1.0.0",
   "description": "cookies and full-stack",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/maslovai/lab-37-cookies"
+    "url": "https://github.com/maslovai/lab-38-file-reader"
   },
   "author": "iryna",
   "license": "ISC",
@@ -25,6 +25,8 @@
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.7.2",
     "react": "^16.2.0",
+    "react-cookie": "^2.1.2",
+    "react-cookies": "^0.1.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",

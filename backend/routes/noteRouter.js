@@ -1,11 +1,12 @@
 'use strict';
 const Note = require('../model/note')
+const bearerAuth = require('../lib/middleware/bearer-auth')
 const bodyParser = require('body-parser').json();
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const noteRouter = module.exports = require('express').Router();
 
-noteRouter.post('/api/notes/post', bodyParser,(req, res, next) => {
+noteRouter.post('/api/notes/post', bearerAuth, bodyParser,(req, res, next) => {
     console.log("backend post::::", req.body);
     let note = new Note({"content":req.body.content});
     note.save()
@@ -14,7 +15,7 @@ noteRouter.post('/api/notes/post', bodyParser,(req, res, next) => {
 })
 
 
-noteRouter.get('/api/notes/get', (req, res, next) => {
+noteRouter.get('/api/notes/get', bearerAuth,(req, res, next) => {
     Note.find()
     .then(noteArray=>{
         res.send(noteArray)
@@ -22,7 +23,7 @@ noteRouter.get('/api/notes/get', (req, res, next) => {
     .catch(err => res.send(err))    
 })
 
-noteRouter.put('/api/notes/edit', bodyParser, (req, res, next)=>{
+noteRouter.put('/api/notes/edit', bearerAuth, bodyParser, (req, res, next)=>{
     // console.log('in edit user');
         Note.findOne({_id:req.body._id})
         .then(note=>{
@@ -36,7 +37,7 @@ noteRouter.put('/api/notes/edit', bodyParser, (req, res, next)=>{
         .catch(next)
 })
 
-noteRouter.delete(`/api/notes/delete`, bodyParser,(req, res, next)=>{
+noteRouter.delete(`/api/notes/delete`, bearerAuth, bodyParser,(req, res, next)=>{
     console.log('in note router delete:::::', req.body);
     Note.findOne({_id:req.body._id})
     .then( note => {

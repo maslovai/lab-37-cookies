@@ -6,7 +6,6 @@ class NoteForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.note || {content:''};
-        // console.log(this.props.handler);
         this.handleChange = this.handleChange.bind(this);
         this.handleNewNote = this.handleNewNote.bind(this)
     }
@@ -21,12 +20,9 @@ class NoteForm extends React.Component {
     }
 
     render() {
-        console.log(this.props.edit);
-
-        // if (this.props.edit) {currentClass = "notelistForm"} else currentClass = "noteForm";
-        // console.log("class::", currentClass);
+        // console.log(this.props.edit);
         return (
-            <form  className= {this.props.edit===true ? "notelistForm" : "noteForm"} onSubmit={this.handleNewNote}>
+            <form  className= {this.props.edit ? "notelistForm" : "noteForm"} onSubmit={this.handleNewNote}>
                 <input 
                     placeholder="Type Note" 
                     type="textarea" 

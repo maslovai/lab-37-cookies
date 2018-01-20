@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 
 import NoteForm from './note-form';
 import NoteList from './note-list';
+import Auth from '../auth/auth';
 
-import * as actions from '../../app/action';
+import * as actions from './actions';
 
 class Notes extends React.Component {
 
@@ -19,10 +20,12 @@ class Notes extends React.Component {
     render() {
 // console.log('render', this.props)
         return (
+            <Auth>
             <React.Fragment>
                 <NoteForm handler={this.props.noteCreate} edit ={false} button="add note" />
                 <NoteList noteArray={this.props.noteArray} handler={this.props.noteUpdate} deleteHandler={this.props.noteDelete} />
             </React.Fragment>
+            </Auth>
         )
     }
 }
