@@ -6,7 +6,7 @@ export const authSignin = (user={}) => dispatch=>{
     let token = cookie.load("auth");
     console.log("in authSignin , token", token);
     if(token) {
-        console.log('in get with token',token)
+        // console.log('in get with token',token)
         dispatch(setToken(token));
         return;
     }
