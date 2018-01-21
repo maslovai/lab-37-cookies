@@ -1,12 +1,15 @@
 import uuid from 'uuid/v1'
 import superagent from 'superagent';
-
+import cookie from 'react-cookies';
 let API = `${__API_URL__}/notes`;
 
 export const noteInitialize = () => dispatch => {
+     console.log('in notes init::::, bearer token::::::', bearerToken());
     superagent
         .get(`${API}/get`)
+        .set('Authorization', 'Bearer ' + bearerToken())
         .then(res => {
+            console.log('in notes init:::::', res)
             let arr = res.body;
              dispatch(initAction(arr));    
         })
@@ -16,6 +19,7 @@ export const noteInitialize = () => dispatch => {
 export const noteCreate = payload => dispatch=>{
     superagent
     .post(`${API}/post`)
+    .set('Authorization', 'Bearer ' + bearerToken())
     .send({"content":payload.content})
     .then(res => {
         console.log('after post:::::', res.body)
@@ -27,6 +31,7 @@ export const noteCreate = payload => dispatch=>{
 export const noteDelete = payload => dispatch => {
     superagent
         .delete(`${API}/delete`)
+        .set('Authorization', 'Bearer '+bearerToken())
         .send(payload)
         .then(() => {
             dispatch(deleteAction(payload))
@@ -37,11 +42,17 @@ export const noteDelete = payload => dispatch => {
 export const noteUpdate = payload => dispatch => {
     superagent
         .put(`${API}/edit`)
+        .set('Authorization', 'Bearer '+bearerToken())
         .send(payload)
         .then(()=>{
             dispatch(updateAction(payload))
         })
         .catch(err=>console.log(err))
+}
+
+const bearerToken=()=>{
+    let a = cookie.load("auth")
+    return a
 }
 
 const initAction = list => ({

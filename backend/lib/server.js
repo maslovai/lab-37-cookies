@@ -6,19 +6,18 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect(process.env.MONGODB_URI);
 
-// const cors =require('cors');
+const cors =require('cors');
 
 const app = module.exports = require('express')();
 
-app.use('*', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Credentials',  true);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
-    res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
-    next();
+app.use(
+    cors({
+        origin: process.env.CORS_ORIGINS.split(' '),
+        credentials: true,
     })
+)
 
+app.use (require('../routes/auth-route'));
 app.use(require('../routes/noteRouter'));
 
 app.all('*', (req, res, next) => {
