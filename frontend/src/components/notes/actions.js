@@ -51,8 +51,8 @@ export const noteUpdate = payload => dispatch => {
 }
 
 const bearerToken=()=>{
-    let a = cookie.load("auth")
-    return a
+    let auth = cookie.load("auth")
+    return auth
 }
 
 const initAction = list => ({
