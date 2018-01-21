@@ -1,21 +1,24 @@
 import React from 'react';
 import Enzyme from 'enzyme';
-import uuid from 'uuid/v1';
+// import Note from '../../../../backend/models/note'
 import superagent from 'superagent';
 import reducer from '../../components/notes/reducer';
 
 
 describe('Notes Reducer:', () => {
 		
-    let testNote = {content:'test antibiotic', id: uuid()};
+    let testNote = {content:'test note'};
     let state =[];		
 
     test('adds a new note', () => {
         let action = {type: 'CREATE', payload: testNote};
         state = reducer(state, action);
-
-        superagent.get(`${process.env.API_URL}/records?${testNote._id}`)
-        .then(res=> expect(res.body.id).toEqual(testNote._id))
+        console.log("in test add: ",state)
+        superagent.get(`${process.env.API_URL}/get`)
+        .then(res=> {
+            console.log('testing', res.body)
+            expect(res.body).not.toBe(null)
+        })
         .catch(err=>console.log(err))     
     });
 

@@ -31,7 +31,6 @@ class SignInForm extends React.Component{
                     <label>Registered users sign in:
                         <input type="text" 
                             name="username" 
-                            value={this.state.username}
                             onChange={this.handleChange}
                             requiered = "true"
                             placeholder="type your name">
@@ -40,7 +39,6 @@ class SignInForm extends React.Component{
                     <label>
                         <input type="password" 
                             name="password" 
-                            value={this.state.password}
                             onChange={this.handleChange}
                             requiered = "true"
                             placeholder="password">
@@ -53,7 +51,6 @@ class SignInForm extends React.Component{
                     <label>New users sign up here:
                         <input type="text" 
                             name="username" 
-                            value={this.state.username}
                             onChange={this.handleChange}
                             requiered = "true"
                             placeholder="type your name">
@@ -62,7 +59,6 @@ class SignInForm extends React.Component{
                     <label>
                         <input type="email" 
                             name="email" 
-                            value={this.state.email}
                             onChange={this.handleChange}
                             requiered = "true"                       
                             placeholder="type your email">
@@ -71,8 +67,8 @@ class SignInForm extends React.Component{
                     <label>
                         <input type="password" 
                             name="password" 
-                            value={this.state.password}
                             onChange={this.handleChange}
+                            requiered = "true"
                             placeholder="type your password">
                         </input>
                     </label>
